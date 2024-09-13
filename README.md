@@ -27,6 +27,13 @@ Identity-Estimation is a Python tool designed to take an picture of someone and 
     pip install -r requirements.txt
     ```
 
+3. **Download Pre-Trained Modles**:
+    ```bash
+    Since Github has a set upload file size I had uploaded the pre-trained modles to this mega.nz archive you can find below.
+    There you will get the modles.zip, from there extract the files into the same directory as the python program.
+    https://mega.nz/file/6vYkzArR#IFVD61aWDJGJTswegk8xjr2_1OEwNBg21QK2eVEAFbk
+    ```
+
 ## Usage
 
 1. **Prepare the Image**:
