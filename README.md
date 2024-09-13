@@ -45,6 +45,31 @@ Identity-Estimation is a Python tool designed to take an picture of someone and 
     ```
     You will be prompted for a file to save the results into, you can enter a file name for example `users` and for your next face scan you can specify the same file and it will append results alongside username / alias.
 
+### Usage for windows
+
+1. **Create a Virtual Enviorment**:
+    ```bash
+    python3 -m venv venv
+    #OR specify the install path of your python installation.
+    C:\Users\USER\AppData\Local\Programs\PythonX\python.exe -m venv venv
+    ```
+
+2. **Activate The Virtual Enviorment**:
+    ```bash
+    .\venv\Scripts\activate
+    ```
+
+3. **Install requirements**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Run the Program**:
+    ```bash
+    python main.py --image image.jpg
+    ## For easier use put the image into the same directory as the python program
+    ```
+
 ## Example
 
 ```bash
