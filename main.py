@@ -12,12 +12,12 @@ class FaceDetector:
         
         self.model_mean_values = (92.1263377603, 87.7689143744, 71.695847746)
         self.age_list = [
-            '(0-2)', '(3-5)', '(6-8)', '(9-11)', '(12-14)', '(15-17)', '(18-20)', '(21-23)',
-            '(24-26)', '(27-29)', '(30-32)', '(33-35)', '(36-38)', '(39-41)', '(42-44)', '(45-47)',
-            '(48-50)', '(51-53)', '(54-56)', '(57-59)', '(60-62)', '(63-65)', '(66-68)', '(69-71)',
-            '(72-74)', '(75-77)', '(78-80)', '(81-83)', '(84-86)', '(87-89)', '(90-92)', '(93-95)',
-            '(96-98)', '(99-100)'
+            '(0-3)', '(4-7)', '(8-11)', '(12-15)', '(16-19)', '(20-23)', '(24-27)', '(28-31)',
+            '(32-35)', '(36-39)', '(40-43)', '(44-47)', '(48-51)', '(52-55)', '(56-59)', '(60-63)',
+            '(64-67)', '(68-71)', '(72-75)', '(76-79)', '(80-83)', '(84-87)', '(88-91)', '(92-95)',
+            '(96-99)', '(100-103)'
         ]
+
         self.gender_list = ['Male', 'Female']
 
     def highlight_faces(self, frame, conf_threshold=0.7):
@@ -77,20 +77,23 @@ def main():
     video = cv2.VideoCapture(video_source)
     
     if not video.isOpened():
-        print("[!] Error Could not open video source.")
+        print("Error: Could not open video source.")
         return
     
     padding = 20
     target_width, target_height = 1000, 900
 
+    # Ask user if they want to save results to CSV
     save_to_csv = input("Do you want to save results to a CSV file? (yes/no): ").strip().lower()
     if save_to_csv == 'yes':
         csv_filename = input("Enter the CSV file name: ").strip()
         csv_alias = input("Enter an alias for the image (optional): ").strip()
         
+        # Create or open the CSV file
         csv_exists = os.path.exists(csv_filename)
         with open(csv_filename, 'a', newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
+            # Write headers if file does not exist
             if not csv_exists:
                 csv_writer.writerow(['Alias', 'Gender', 'Age'])
     
@@ -103,7 +106,7 @@ def main():
         result_img, face_boxes = detector.highlight_faces(frame)
         
         if not face_boxes:
-            print("[!] No face detected")
+            print("No face detected")
         
         for face_box in face_boxes:
             x1, y1, x2, y2 = face_box
@@ -114,8 +117,8 @@ def main():
                 continue
             
             gender, age = detector.analyze_face(face)
-            print(f'[*] Gender: {gender}')
-            print(f'[*] Age: {age} years')
+            print(f'Gender: {gender}')
+            print(f'Age: {age} years')
             
             text = f'{gender}, {age}'
             text_size, _ = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, 0.8, 2)
@@ -123,14 +126,16 @@ def main():
             cv2.rectangle(result_img, (x1, y1 - text_h - 10), (x1 + text_w, y1), (0, 255, 255), -1)
             cv2.putText(result_img, text, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2, cv2.LINE_AA)
             
+            # Write to CSV file
             if save_to_csv == 'yes':
                 with open(csv_filename, 'a', newline='') as csvfile:
                     csv_writer = csv.writer(csvfile)
                     csv_writer.writerow([csv_alias, gender, age])
-    
+        
         resized_img = resize_image(result_img, target_width, target_height)
-        cv2.imshow("[+] Detecting Age and Gender", resized_img)
-        key = cv2.waitKey(0)
+        cv2.imshow("Detecting Age and Gender", resized_img)
+        
+        key = cv2.waitKey(0)  # Use a short delay to ensure window updates
         if key == ord('q'):
             break
     
