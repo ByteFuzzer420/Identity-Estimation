@@ -1,4 +1,4 @@
-![Identity-Estimation](https://img.shields.io/github/license/kathuluman/Identity-Estimation?color=blue&style=for-the-badge) ![Version](https://img.shields.io/github/v/tag/kathuluman/Identity-Estimation?color=blue&style=for-the-badge)
+![Identity-Estimation](https://img.shields.io/github/license/ByteFuzzer420/Identity-Estimation?color=blue&style=for-the-badge) ![Version](https://img.shields.io/github/v/tag/ByteFuzzer420/Identity-Estimation?color=blue&style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)
 ![Version](https://img.shields.io/badge/version-3.0.0-green?style=for-the-badge)
 
@@ -18,7 +18,7 @@ Identity-Estimation is a Python tool designed to take an picture of someone and 
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/kathuluman/Identity-Estimation.git
+    git clone https://github.com/ByteFuzzer420/Identity-Estimation.git
     cd Identity-Estimation
     ```
 
